@@ -1,16 +1,26 @@
+
+import { useState } from "react";
+import GameBord from "./components/GameBord";
 import Player from "./components/Player";
 
 function App() {
+
+  const [activePlayer,setActivePlayer] = useState('X');
+
+  function handleSelecrSqure(){
+      setActivePlayer((currentActivePlayer)=>currentActivePlayer==="X" ? "O" : "X");
+
+  }
   return (
     <main>
       <div id="game-container">
-        <ol id="players">
-          <Player initialName="Player 01" symbol="X" />
-          <Player initialName="Player 02" symbol="O" />
+        <ol id="players" className="highlight-player">
+          <Player initialName="Player 01" symbol="X" isActive={activePlayer==="X"} />
+          <Player initialName="Player 02" symbol="O" isActive={activePlayer==="O"}/>
         </ol>
-        GAAME BORD
+        <GameBord onSelectSqr={handleSelecrSqure} activePlayerSymbl={activePlayer}/>
       </div>
-      LOG
+       log
     </main>
   );
 }
